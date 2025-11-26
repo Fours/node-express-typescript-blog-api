@@ -4,7 +4,7 @@ import type { Article } from "../types/types"
 
 export async function readData(): Promise<Article[]> {
   try { 
-    const dataPath = path.join("data", "data.json")
+    const dataPath = path.join("dist", "data", "data.json")
     const data = await fs.readFile(dataPath, "utf8")
     return JSON.parse(data)
   } catch(err) {
@@ -14,7 +14,7 @@ export async function readData(): Promise<Article[]> {
 }
 
 export async function writeData(data: Article[]): Promise<void> {    
-    const dataPath = path.join("data", "data.json")    
+    const dataPath = path.join("dist", "data", "data.json")    
     await fs.writeFile(
         dataPath,
         JSON.stringify(data, null, 2),
