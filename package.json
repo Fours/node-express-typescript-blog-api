@@ -1,0 +1,22 @@
+{
+  "name": "express-typescript-blog-api",
+  "version": "1.0.0",
+  "description": "todo",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npx tsc && node dist/index.js",
+    "dev": "onchange 'src/**/*.ts' -- npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kyle Willett",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.8",
+    "@types/express": "^5.0.5",
+    "onchange": "^7.1.0",
+    "typescript": "^5.9.3"
+  }
+}
