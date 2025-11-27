@@ -6,3 +6,7 @@ export type Article = {
     blurb: string
     body: string
 }
+
+export type Message = {
+  message: string
+}

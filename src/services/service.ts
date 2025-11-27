@@ -1,4 +1,4 @@
-import { readData } from "./data";
+import { readData } from "../utils/data";
 
 import type { Article } from "../types/types"
 
@@ -24,4 +24,12 @@ export async function getArticles(
     }
 
     return articles
+}
+
+export async function getArticle(id: string): Promise<Article | null> {
+    
+    const articles = await readData()
+    const article = articles.find(article => article.id === id)
+    
+    return article ? article : null    
 }

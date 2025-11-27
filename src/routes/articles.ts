@@ -1,8 +1,9 @@
 import express from "express"
-import { getArticles } from "../utils/service"
+import { getArticle, getArticles } from "../services/service"
+import { validateId } from "../services/middleware"
 
 import type { Request, Response, Router  } from "express"
-import type { Article } from "../types/types"
+import type { Article, Message } from "../types/types"
 
 type ArticleQueryParams = {
   author?: string
@@ -17,6 +18,22 @@ articlesRouter.get('/', async (
 
     const articles = await getArticles(req.query.author, req.query.tags)    
     res.json(articles)
+})
+
+articlesRouter.get('/:id', validateId, async (
+  req:Request<{ id: string}>, 
+  res:Response<Article | Message>): Promise<void> => {
+
+    const article = await getArticle(req.params.id)    
+    if (article) {
+      res.json(article)
+    } else {
+      res.status(404).json({
+        message: "No article found with that id"
+      })
+    }
+    
+    
 })
 
 
