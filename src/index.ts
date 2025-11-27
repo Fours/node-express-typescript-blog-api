@@ -5,15 +5,15 @@ const PORT = 8000
 const app: Express = express()
 
 type Message = {
-  message: string
+    message: string
 }
 
 app.use('/api/articles', articlesRouter)
 
 app.use((req: Request, res: Response<Message>): void => {
-  res.status(404).json({message: "No endpoint found"})
+    res.status(404).json({message: "No endpoint found"})
 })
 
 app.listen(PORT, (): void => {
-  console.log(`Listening on port: ${PORT}`)
+    console.log(`Listening on port: ${PORT}`)
 })

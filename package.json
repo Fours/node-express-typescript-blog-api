@@ -19,6 +19,7 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.8",
     "@types/express": "^5.0.5",
+    "@types/sanitize-html": "^2.16.0",
     "copyfiles": "^2.4.1",
     "onchange": "^7.1.0",
     "typescript": "^5.9.3"

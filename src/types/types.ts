@@ -8,5 +8,5 @@ export type Article = {
 }
 
 export type Message = {
-  message: string
+    message: string
 }

@@ -1,4 +1,5 @@
-import { readData } from "../utils/data";
+import { v4 as uuidv4 } from 'uuid';
+import { readData, writeData } from "../utils/data";
 
 import type { Article } from "../types/types"
 
@@ -32,4 +33,15 @@ export async function getArticle(id: string): Promise<Article | null> {
     const article = articles.find(article => article.id === id)
     
     return article ? article : null    
+}
+
+export async function addArticle(payload: Omit<Article, "id" | "timestamp">): Promise<void> {
+    const articles = await readData()
+    const article: Article = {        
+        id: uuidv4(),
+        timestamp: Date.now(),
+        ...payload        
+    }
+    articles.push(article)
+    await writeData(articles)
 }
