@@ -35,13 +35,14 @@ export async function getArticle(id: string): Promise<Article | null> {
     return article ? article : null    
 }
 
-export async function addArticle(payload: Omit<Article, "id" | "timestamp">): Promise<void> {
+export async function addArticle(newArticle: Omit<Article, "id" | "timestamp">): Promise<Article> {
     const articles = await readData()
     const article: Article = {        
         id: uuidv4(),
         timestamp: Date.now(),
-        ...payload        
+        ...newArticle        
     }
     articles.push(article)
     await writeData(articles)
+    return article
 }

@@ -1,6 +1,7 @@
 import express from "express"
 import { addArticle, getArticle, getArticles } from "../services/service"
-import { validateId } from "../services/middleware"
+import { validateId, validatePost } from "../services/middleware"
+import { sanitizeStrings } from "../utils/input"
 
 import type { Request, Response, Router  } from "express"
 import type { Article, Message } from "../types/types"
@@ -38,14 +39,21 @@ articlesRouter.get("/:id", validateId, async (
     }
 })
 
-articlesRouter.post("/", async (
+articlesRouter.post("/", validatePost,  async (
     req: Request<{}, unknown, Omit<Article, "id" | "timestamp">>,
-    res: Response
+    res: Response<Article>
 ): Promise<void> => {
-    
-    const payload = req.body
-    // todo: sanitze strings and validate input in middleware
-    res.json({ message: "todo"})
+
+    const sanitizedPayload = sanitizeStrings(req.body)
+    const newArticle = {
+        author: sanitizedPayload.author || "",
+        tags: sanitizedPayload.tags || [],
+        blurb: sanitizedPayload.blurb || "",
+        body: sanitizedPayload.body || ""
+    }
+
+    const article = await addArticle(newArticle)
+    res.json(article)
 })
 
 

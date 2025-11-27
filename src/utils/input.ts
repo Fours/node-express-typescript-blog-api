@@ -11,11 +11,11 @@ export function sanitizeStrings(data: Partial<Article>) {
     }
 
     if (typeof data.blurb === "string") {
-        sanitizedData.author = noTags(data.blurb)
+        sanitizedData.blurb = noTags(data.blurb)
     }
 
     if (typeof data.body === "string") {
-        sanitizedData.author = 
+        sanitizedData.body = 
             sanitizeHtml(data.body, { allowedTags: ["p","b"], allowedAttributes: {}}).trim()
     }
     
