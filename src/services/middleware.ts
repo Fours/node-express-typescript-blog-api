@@ -51,10 +51,9 @@ export function validatePut(
             message: "Invalid article properties"
         })
     }
-
 }
 
-function isValidPost(payload: Omit<Article, "id" | "timestamp">): boolean {
+export function isValidPost(payload: Omit<Article, "id" | "timestamp">): boolean {
     return (
         typeof payload.author === "string" &&
         isStringArray(payload.tags) &&

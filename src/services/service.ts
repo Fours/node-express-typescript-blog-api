@@ -70,3 +70,16 @@ export async function replaceArticle(partialArticle: Partial<Article>): Promise<
         return false
     }
 }
+
+export async function deleteArticle(id: string): Promise<boolean> {
+
+    const articles = await readData()   
+    const article = articles.find(article => article.id === id)
+    if (article) {
+        const updatedArticles = articles.filter(article => article.id !== id)
+        await writeData(updatedArticles)
+        return true
+    } {
+        return false
+    }     
+}

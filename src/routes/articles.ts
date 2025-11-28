@@ -1,6 +1,12 @@
 import express from "express"
-import { addArticle, getArticle, getArticles, replaceArticle } from "../services/service"
-import { validateId, validatePost, validatePut } from "../services/middleware"
+import { 
+    addArticle, 
+    deleteArticle, 
+    getArticle, 
+    getArticles, 
+    replaceArticle 
+} from "../services/service"
+import { isValidPost, validateId, validatePost, validatePut } from "../services/middleware"
 import { sanitizeStrings } from "../utils/input"
 
 import type { Request, Response, Router  } from "express"
@@ -53,7 +59,7 @@ articlesRouter.post("/", validatePost,  async (
     }
 
     const article = await addArticle(newArticle)
-    res.json(article)
+    res.status(201).json(article)
 })
 
 articlesRouter.put("/", validatePut,  async (
@@ -65,6 +71,29 @@ articlesRouter.put("/", validatePut,  async (
     const result = await replaceArticle(partialArticle)
     if (result) {
         res.json(result)
+    } else {
+        const newArticle = partialArticle as Omit<Article, "id" | "timestamp">
+        if (isValidPost(newArticle)) {
+            const addedArticle = await addArticle(newArticle)
+            res.status(201).json(addedArticle)
+        } else {
+            res.status(400).json({
+                message: "Invalid article properties"
+            })
+        }
+    }
+})
+
+articlesRouter.delete("/:id", validateId, async (
+    req:Request<{ id: string }>, 
+    res:Response<Message>
+): Promise<void> => {
+
+    const isFound = await deleteArticle(req.params.id)    
+    if (isFound) {
+        res.json({
+            message: "Article deleted"
+        })
     } else {
         res.status(404).json({
             message: "No article found with that id"
