@@ -2,9 +2,15 @@
 Install the dependencies and run the project
 ```
 npm install
-npm start
+npm run start
 ```
 
 ## About
-This is a blog REST api to practice and demonstrate the fundamentals of javascript, Typescript, and the Express framework.
+This is a blog REST api built with javascript, Typescript, Node.js, and the Express framework, with Jest unit testing. It uses the file system as a simple data store.
+
+## Testing
+Run unit tests
+```
+npm test
+```
 
