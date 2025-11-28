@@ -31,6 +31,29 @@ export function validatePost(
     }
 }
 
+export function validatePut(
+    req: Request<{}, unknown, Partial<Article>>, 
+    res: Response<Message>, 
+    next: NextFunction    
+): void {
+    const id = req.body.id ? req.body.id : ""
+    try {
+        uuidParse(id)        
+    } catch {
+        res.status(400).json({
+            message: "Article id must be present and be a valid uuid"
+        })
+    }
+    if (isValidPut(req.body)) {
+        next()
+    } else {
+        res.status(400).json({
+            message: "Invalid article properties"
+        })
+    }
+
+}
+
 function isValidPost(payload: Omit<Article, "id" | "timestamp">): boolean {
     return (
         typeof payload.author === "string" &&
@@ -44,4 +67,12 @@ function isStringArray(tags: string[]) {
     return Array.isArray(tags) && tags.every(tag => {
         return typeof tag === 'string'
     })
+}
+
+function isValidPut(payload: Partial<Article>): boolean {
+    
+    return (payload.author === undefined || typeof payload.author === "string") &&
+        (payload.tags === undefined || isStringArray(payload.tags)) &&
+        (payload.blurb === undefined || typeof payload.blurb === "string") && 
+        (payload.body === undefined || typeof payload.body === "string")
 }

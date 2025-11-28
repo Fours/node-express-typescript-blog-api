@@ -1,6 +1,6 @@
 import express from "express"
-import { addArticle, getArticle, getArticles } from "../services/service"
-import { validateId, validatePost } from "../services/middleware"
+import { addArticle, getArticle, getArticles, replaceArticle } from "../services/service"
+import { validateId, validatePost, validatePut } from "../services/middleware"
 import { sanitizeStrings } from "../utils/input"
 
 import type { Request, Response, Router  } from "express"
@@ -54,6 +54,22 @@ articlesRouter.post("/", validatePost,  async (
 
     const article = await addArticle(newArticle)
     res.json(article)
+})
+
+articlesRouter.put("/", validatePut,  async (
+    req: Request<{}, unknown, Partial<Article>>,
+    res: Response<Article | Message>
+): Promise<void> => {
+
+    const partialArticle = req.body
+    const result = await replaceArticle(partialArticle)
+    if (result) {
+        res.json(result)
+    } else {
+        res.status(404).json({
+            message: "No article found with that id"
+        })
+    }
 })
 
 
