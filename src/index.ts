@@ -14,6 +14,8 @@ app.use((req: Request, res: Response<Message>): void => {
     res.status(404).json({message: "No endpoint found"})
 })
 
-app.listen(PORT, (): void => {
+const server = app.listen(PORT, (): void => {
     console.log(`Listening on port: ${PORT}`)
 })
+
+module.exports = server;

@@ -7,7 +7,7 @@
     "copy-files": "copyfiles -u 1 \"src/data/data.json\" dist/",
     "start": "npx tsc && npm run copy-files && node dist/index.js",
     "dev": "onchange 'src/**/*.ts' -- npm run start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Kyle Willett",
   "license": "ISC",
@@ -17,11 +17,19 @@
     "uuid": "13.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
     "@tsconfig/node20": "^20.1.8",
     "@types/express": "^5.0.5",
+    "@types/jest": "^30.0.0",
     "@types/sanitize-html": "^2.16.0",
+    "babel-jest": "^30.2.0",
     "copyfiles": "^2.4.1",
+    "jest": "^30.2.0",
     "onchange": "^7.1.0",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5",
     "typescript": "^5.9.3"
   }
 }
