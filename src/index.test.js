@@ -8,7 +8,7 @@ afterAll((done) => {
 });
 
 describe("GET /does-not-exist", () => {
-    it("should return a not found response", async () => {
+    it("should return a 'Not Found' response", async () => {
         const res = await request(app).get("/does-not-exist");
         expect(res.statusCode).toEqual(404);
         expect(res.body.message).toBe("No endpoint found");
