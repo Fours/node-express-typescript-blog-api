@@ -51,17 +51,17 @@ export async function addArticle(newArticle: Omit<Article, "id" | "timestamp">):
 export async function replaceArticle(partialArticle: Partial<Article>): Promise<Article | false> {
     
     const id = partialArticle.id ? partialArticle.id : ""
-    const article = await getArticle(id)
+    const articles = await readData()
+    const article = articles.find(article => article.id === id)
     if (article) {
         const updatedArticle: Article = {
             id: article.id,
             timestamp: article.timestamp,
-            author: partialArticle.author ? partialArticle.author : article.author,
-            tags: partialArticle.tags ? partialArticle.tags : article.tags,
-            blurb: partialArticle.blurb ? partialArticle.blurb : article.blurb,
-            body: partialArticle.body ? partialArticle.body : article.body
+            author: partialArticle.author !== undefined ? partialArticle.author : article.author,
+            tags: partialArticle.tags !== undefined ? partialArticle.tags : article.tags,
+            blurb: partialArticle.blurb !== undefined ? partialArticle.blurb : article.blurb,
+            body: partialArticle.body !== undefined ? partialArticle.body : article.body
         }
-        const articles = await readData()
         const updatedArticles = articles.map(a => 
             a.id === updatedArticle.id ? updatedArticle : a)        
         await writeData(updatedArticles)
