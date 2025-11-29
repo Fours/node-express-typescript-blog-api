@@ -22,8 +22,8 @@ export const articlesRouter: Router = express.Router()
 articlesRouter.use(express.json());
 
 articlesRouter.get("/", async (
-    req:Request<{}, unknown, {}, ArticleQueryParams>, 
-    res:Response<Article[]>
+    req: Request<{}, unknown, {}, ArticleQueryParams>, 
+    res: Response<Article[]>
 ): Promise<void> => {
 
     const articles = await getArticles(req.query.author, req.query.tags)    
@@ -31,8 +31,8 @@ articlesRouter.get("/", async (
 })
 
 articlesRouter.get("/:id", validateId, async (
-    req:Request<{ id: string }>, 
-    res:Response<Article | Message>
+    req: Request<{ id: string }>, 
+    res: Response<Article | Message>
 ): Promise<void> => {
 
     const article = await getArticle(req.params.id)    
@@ -85,8 +85,8 @@ articlesRouter.put("/", validatePut,  async (
 })
 
 articlesRouter.delete("/:id", validateId, async (
-    req:Request<{ id: string }>, 
-    res:Response<Message>
+    req: Request<{ id: string }>, 
+    res: Response<Message>
 ): Promise<void> => {
 
     const isFound = await deleteArticle(req.params.id)    
