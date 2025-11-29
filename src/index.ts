@@ -18,4 +18,4 @@ const server = app.listen(PORT, (): void => {
     console.log(`Listening on port: ${PORT}`)
 })
 
-module.exports = server;
+module.exports = server; // for tests
