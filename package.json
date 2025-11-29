@@ -6,8 +6,8 @@
   "scripts": {
     "copy-files": "copyfiles -u 1 \"src/data/data.json\" dist/",
     "start": "npx tsc && npm run copy-files && node dist/index.js",
-    "dev": "onchange 'src/**/*.ts' -- npm run start",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "npm test -- --coverage"
   },
   "author": "Kyle Willett",
   "license": "ISC",
@@ -27,7 +27,6 @@
     "babel-jest": "^30.2.0",
     "copyfiles": "^2.4.1",
     "jest": "^30.2.0",
-    "onchange": "^7.1.0",
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.5",
     "typescript": "^5.9.3"

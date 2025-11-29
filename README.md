@@ -12,5 +12,6 @@ This is a blog REST api built with javascript, Typescript, Node.js, and the Expr
 Run unit tests
 ```
 npm test
+npm run coverage
 ```
 
