@@ -12,7 +12,7 @@ describe("validateId", () => {
     describe("when id param is not a valid uuid", () => {
         it("should return a 'Bad Request' response", async () => {
             const res = await request(app).get("/api/articles/not-a-uuid");
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toBe(400);
             expect(res.body.message).toBe("Article id must be a valid uuid");
         });
     });
@@ -33,11 +33,11 @@ describe("validatePost", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle1 = {...article, author: undefined}
             const res1 = await request(app).post("/api/articles").send(invalidArticle1);
-            expect(res1.statusCode).toEqual(400);
+            expect(res1.statusCode).toBe(400);
             expect(res1.body.message).toBe(message);
             const invalidArticle2 = {...article, author: true}
             const res2 = await request(app).post("/api/articles").send(invalidArticle2);
-            expect(res2.statusCode).toEqual(400);
+            expect(res2.statusCode).toBe(400);
             expect(res2.body.message).toBe(message);
         });
     });
@@ -46,11 +46,11 @@ describe("validatePost", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle1 = {...article, tags: undefined}
             const res1 = await request(app).post("/api/articles").send(invalidArticle1);
-            expect(res1.statusCode).toEqual(400);
+            expect(res1.statusCode).toBe(400);
             expect(res1.body.message).toBe(message);
             const invalidArticle2 = {...article, tags: ["tag", true]}
             const res2 = await request(app).post("/api/articles").send(invalidArticle2);
-            expect(res2.statusCode).toEqual(400);
+            expect(res2.statusCode).toBe(400);
             expect(res2.body.message).toBe(message);
         });
     });
@@ -59,11 +59,11 @@ describe("validatePost", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle1 = {...article, title: undefined}
             const res1 = await request(app).post("/api/articles").send(invalidArticle1);
-            expect(res1.statusCode).toEqual(400);
+            expect(res1.statusCode).toBe(400);
             expect(res1.body.message).toBe(message);
             const invalidArticle2 = {...article, title: true}
             const res2 = await request(app).post("/api/articles").send(invalidArticle2);
-            expect(res2.statusCode).toEqual(400);
+            expect(res2.statusCode).toBe(400);
             expect(res2.body.message).toBe(message);
         });
     });
@@ -72,11 +72,11 @@ describe("validatePost", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle1 = {...article, blurb: undefined}
             const res1 = await request(app).post("/api/articles").send(invalidArticle1);
-            expect(res1.statusCode).toEqual(400);
+            expect(res1.statusCode).toBe(400);
             expect(res1.body.message).toBe(message);
             const invalidArticle2 = {...article, blurb: true}
             const res2 = await request(app).post("/api/articles").send(invalidArticle2);
-            expect(res2.statusCode).toEqual(400);
+            expect(res2.statusCode).toBe(400);
             expect(res2.body.message).toBe(message);
         });
     });
@@ -85,11 +85,11 @@ describe("validatePost", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle1 = {...article, body: undefined}
             const res1 = await request(app).post("/api/articles").send(invalidArticle1);
-            expect(res1.statusCode).toEqual(400);
+            expect(res1.statusCode).toBe(400);
             expect(res1.body.message).toBe(message);
             const invalidArticle2 = {...article, body: true}
             const res2 = await request(app).post("/api/articles").send(invalidArticle2);
-            expect(res2.statusCode).toEqual(400);
+            expect(res2.statusCode).toBe(400);
             expect(res2.body.message).toBe(message);
         });
     });
@@ -112,7 +112,7 @@ describe("validatePut", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle = {...article, id: undefined}
             const res = await request(app).put("/api/articles").send(invalidArticle);
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toBe(400);
             expect(res.body.message).toBe(message1);
         });
     });
@@ -121,7 +121,7 @@ describe("validatePut", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle = {...article, id: "not-a-uuid"}
             const res = await request(app).put("/api/articles").send(invalidArticle);
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toBe(400);
             expect(res.body.message).toBe(message1);
         });
     });
@@ -130,7 +130,7 @@ describe("validatePut", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle = {...article, author: true}
             const res = await request(app).put("/api/articles").send(invalidArticle);
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toBe(400);
             expect(res.body.message).toBe(message2);
         });
     });
@@ -139,11 +139,11 @@ describe("validatePut", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle1 = {...article, author: true}
             const res1 = await request(app).put("/api/articles").send(invalidArticle1);
-            expect(res1.statusCode).toEqual(400);
+            expect(res1.statusCode).toBe(400);
             expect(res1.body.message).toBe(message2);
             const invalidArticle2 = {...article, author: ["tag", true]}
             const res2 = await request(app).put("/api/articles").send(invalidArticle2);
-            expect(res2.statusCode).toEqual(400);
+            expect(res2.statusCode).toBe(400);
             expect(res2.body.message).toBe(message2);
         });
     });
@@ -152,7 +152,7 @@ describe("validatePut", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle = {...article, title: true}
             const res = await request(app).put("/api/articles").send(invalidArticle);
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toBe(400);
             expect(res.body.message).toBe(message2);
         });
     });
@@ -161,7 +161,7 @@ describe("validatePut", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle = {...article, blurb: true}
             const res = await request(app).put("/api/articles").send(invalidArticle);
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toBe(400);
             expect(res.body.message).toBe(message2);
         });
     });
@@ -170,7 +170,7 @@ describe("validatePut", () => {
         it("should return a 'Bad Request' response", async () => {
             const invalidArticle = {...article, body: true}
             const res = await request(app).put("/api/articles").send(invalidArticle);
-            expect(res.statusCode).toEqual(400);
+            expect(res.statusCode).toBe(400);
             expect(res.body.message).toBe(message2);
         });
     });
