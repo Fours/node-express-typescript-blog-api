@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express"
 import { articlesRouter } from "./routes/articles"
+import { tagsRouter } from "./routes/tags"
 
 const PORT = 8000
 const app: Express = express()
@@ -9,6 +10,8 @@ type Message = {
 }
 
 app.use('/api/articles', articlesRouter)
+
+app.use('/api/tags', tagsRouter)
 
 app.use((req: Request, res: Response<Message>): void => {
     res.status(404).json({message: "No endpoint found"})

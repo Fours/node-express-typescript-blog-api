@@ -83,3 +83,13 @@ export async function deleteArticle(id: string): Promise<boolean> {
         return false
     }     
 }
+
+export async function getTags(): Promise<string[]> {
+    
+    const articles = await readData()
+    const tags = articles.reduce((acc: string[], article) => {
+        return [...acc, ...article.tags]
+    }, [])
+    const tagsSet = new Set(tags)    
+    return [...tagsSet]    
+}
