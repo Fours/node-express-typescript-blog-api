@@ -36,13 +36,14 @@ export function validatePut(
     res: Response<Message>, 
     next: NextFunction    
 ): void {
-    const id = req.body.id ? req.body.id : ""
+    const id = typeof req.body.id === "string" ? req.body.id : ""
     try {
         uuidParse(id)        
     } catch {
         res.status(400).json({
             message: "Article id must be present and be a valid uuid"
         })
+        return
     }
     if (isValidPut(req.body)) {
         next()
