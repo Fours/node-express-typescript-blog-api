@@ -59,6 +59,7 @@ export async function replaceArticle(partialArticle: Partial<Article>): Promise<
             timestamp: article.timestamp,
             author: partialArticle.author !== undefined ? partialArticle.author : article.author,
             tags: partialArticle.tags !== undefined ? partialArticle.tags : article.tags,
+            title: partialArticle.title !== undefined ? partialArticle.title : article.title,
             blurb: partialArticle.blurb !== undefined ? partialArticle.blurb : article.blurb,
             body: partialArticle.body !== undefined ? partialArticle.body : article.body
         }

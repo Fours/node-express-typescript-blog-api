@@ -3,6 +3,7 @@ export type Article = {
     timestamp: number
     author: string
     tags: string[]
+    title: string
     blurb: string
     body: string
 }

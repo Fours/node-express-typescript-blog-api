@@ -8,6 +8,7 @@ const testData = [
         timestamp: 1763670293754,
         author: "test author 1",
         tags: ["test tag 1"],
+        title: "test title 1",
         blurb: "test blurb 1",
         body: "test body 1"
     },
@@ -16,6 +17,7 @@ const testData = [
         timestamp: 1763670293754,
         author: "test author 2",
         tags: ["test tag 2"],
+        title: "test title 2",
         blurb: "test blurb 2",
         body: "test body 2"
     }

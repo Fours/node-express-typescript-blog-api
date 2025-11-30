@@ -57,6 +57,7 @@ export function isValidPost(payload: Omit<Article, "id" | "timestamp">): boolean
     return (
         typeof payload.author === "string" &&
         isStringArray(payload.tags) &&
+        typeof payload.title === "string" &&
         typeof payload.blurb === "string" &&
         typeof payload.body === "string"
     )
@@ -72,6 +73,7 @@ function isValidPut(payload: Partial<Article>): boolean {
     
     return (payload.author === undefined || typeof payload.author === "string") &&
         (payload.tags === undefined || isStringArray(payload.tags)) &&
+        (payload.title === undefined || typeof payload.title === "string") &&
         (payload.blurb === undefined || typeof payload.blurb === "string") && 
         (payload.body === undefined || typeof payload.body === "string")
 }

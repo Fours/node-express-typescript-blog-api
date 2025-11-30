@@ -10,6 +10,10 @@ export function sanitizeStrings(data: Partial<Article>) {
         sanitizedData.author = noTags(data.author)
     }
 
+    if (typeof data.title === "string") {
+        sanitizedData.title = noTags(data.title)
+    }
+
     if (typeof data.blurb === "string") {
         sanitizedData.blurb = noTags(data.blurb)
     }

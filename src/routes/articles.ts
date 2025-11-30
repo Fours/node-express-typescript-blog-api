@@ -54,6 +54,7 @@ articlesRouter.post("/", validatePost,  async (
     const newArticle = {
         author: sanitizedPayload.author || "",
         tags: sanitizedPayload.tags || [],
+        title: sanitizedPayload.title || "",
         blurb: sanitizedPayload.blurb || "",
         body: sanitizedPayload.body || ""
     }

@@ -5,8 +5,6 @@ import type { Request, Response, Router  } from "express"
 
 export const tagsRouter: Router = express.Router()
 
-//tagsRouter.use(express.json());
-
 tagsRouter.get("/", async (
     req: Request, 
     res: Response<string[]>
