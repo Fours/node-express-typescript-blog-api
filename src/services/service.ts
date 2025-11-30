@@ -94,3 +94,11 @@ export async function getTags(): Promise<string[]> {
     const tagsSet = new Set(tags)    
     return [...tagsSet]    
 }
+
+export async function getAuthors(): Promise<string[]> {
+    
+    const articles = await readData()
+    const authors = articles.map(article => article.author)
+    const authorsSet = new Set(authors)    
+    return [...authorsSet]    
+}
