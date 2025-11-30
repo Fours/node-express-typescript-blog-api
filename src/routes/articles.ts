@@ -51,14 +51,8 @@ articlesRouter.post("/", validatePost,  async (
 ): Promise<void> => {
 
     const sanitizedPayload = sanitizeStrings(req.body)
-    const newArticle = {
-        author: sanitizedPayload.author || "",
-        tags: sanitizedPayload.tags || [],
-        title: sanitizedPayload.title || "",
-        blurb: sanitizedPayload.blurb || "",
-        body: sanitizedPayload.body || ""
-    }
-
+    // can make this assumption since validatePost has already validated payload
+    const newArticle = sanitizedPayload as Omit<Article, "id" | "timestamp">
     const article = await addArticle(newArticle)
     res.status(201).json(article)
 })
