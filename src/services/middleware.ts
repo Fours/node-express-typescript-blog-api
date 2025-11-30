@@ -26,7 +26,7 @@ export function validatePost(
         next()
     } else {
         res.status(400).json({
-            message: "Article must include author: string, tags: string[], blurb: string, and body: string"
+            message: "Article must include author: string, tags: string[], title: string, blurb: string, and body: string"
         })
     }
 }
