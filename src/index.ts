@@ -3,12 +3,10 @@ import { articlesRouter } from "./routes/articles"
 import { tagsRouter } from "./routes/tags"
 import { authorsRouter } from "./routes/authors"
 
+import type { Message } from "./types/types"
+
 const PORT = 8000
 const app: Express = express()
-
-type Message = {
-    message: string
-}
 
 app.use('/api/articles', articlesRouter)
 
