@@ -45,6 +45,37 @@ describe("GET /api/articles", () => {
             expect(res.body).toEqual(testData)
         });
     });
+
+    describe("when author query param is provided", () => {
+        it("should return filtered articles with an 'Ok' response", async () => {
+            
+            const res = await request(app).get(`/api/articles/?author=${testData[1].author}`);
+            expect(res.statusCode).toBe(200);
+            expect(res.body).toEqual([testData[1]])
+        });
+    });
+
+    describe("when tags query param is provided", () => {
+        it("should return filtered articles with an 'Ok' response", async () => {
+            
+            const res1 = await request(app).get(`/api/articles/?tags=${testData[0].tags[0]}`);
+            expect(res1.statusCode).toBe(200);
+            expect(res1.body).toEqual([testData[0]])
+            
+            const res2 = await request(app).get(`/api/articles/?tags=${testData[0].tags[0]},${testData[1].tags[0]}`);
+            expect(res2.statusCode).toBe(200);
+            expect(res2.body).toEqual([])
+        });
+    });
+
+    describe("when both author and tags query param is provided", () => {
+        it("should return filtered articles with an 'Ok' response", async () => {
+            
+            const res1 = await request(app).get(`/api/articles/?tags=${testData[0].tags[0]}&author=${testData[1].author}`);
+            expect(res1.statusCode).toBe(200);
+            expect(res1.body).toEqual([])
+        });
+    });
 })
 
 describe("GET /api/articles/:id", () => {
@@ -75,13 +106,37 @@ describe("POST /api/articles", () => {
         tags: ["tag 3"],
         title: "title 3",
         blurb: "blurb 3",
-        body: "body 3"
+        body: "<p>body <b>3</b></p>"
     }
 
     describe("when new article is valid", () => {
         it("should save article and return a 'Created' response", async () => {
             
             const res = await request(app).post("/api/articles/").send(articlePayload);
+            expect(res.statusCode).toBe(201);
+            expect(typeof res.body.id).toBe("string");
+            expect(res.body.id.length).toBe(36);
+            expect(typeof res.body.timestamp).toBe("number");            
+            const newArticle = {...articlePayload, id: res.body.id, timestamp: res.body.timestamp}
+            expect(res.body).toEqual(newArticle)
+
+            const updatedData = await dataUtil.readData()
+            expect(updatedData).toEqual([...testData, newArticle])
+        });
+    });
+
+    describe("when new article contains unallowed html", () => {
+        it("should strip tags then save article and return a 'Created' response", async () => {
+            
+            const unallowedHtmlPayload = {
+                author: "<script></script><p>author 3</p>",
+                tags: ["<script></script><p>tag 3</p>"],
+                title: "<script></script><p>title 3</p>",
+                blurb: "<script></script><p>blurb 3</p>",
+                body: "<script></script><p>body <b>3</b></p>"
+            }
+            
+            const res = await request(app).post("/api/articles/").send(unallowedHtmlPayload);
             expect(res.statusCode).toBe(201);
             expect(typeof res.body.id).toBe("string");
             expect(res.body.id.length).toBe(36);

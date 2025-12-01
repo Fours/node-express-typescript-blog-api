@@ -51,7 +51,7 @@ articlesRouter.post("/", validatePost,  async (
 ): Promise<void> => {
 
     const sanitizedPayload = sanitizeStrings(req.body)
-    // can make this assumption since validatePost has already validated payload
+    // can make this assumption since validatePost has already validated that required fields are present
     const newArticle = sanitizedPayload as Omit<Article, "id" | "timestamp">
     const article = await addArticle(newArticle)
     res.status(201).json(article)
@@ -62,7 +62,7 @@ articlesRouter.put("/", validatePut,  async (
     res: Response<Article | Message>
 ): Promise<void> => {
 
-    const partialArticle = req.body
+    const partialArticle = sanitizeStrings(req.body)
     const result = await replaceArticle(partialArticle)
     if (result) {
         res.json(result)
