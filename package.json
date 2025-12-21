@@ -12,6 +12,7 @@
   "author": "Kyle Willett",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "sanitize-html": "2.17.0",
     "uuid": "13.0.0"
@@ -21,6 +22,7 @@
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@tsconfig/node20": "^20.1.8",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
     "@types/jest": "^30.0.0",
     "@types/sanitize-html": "^2.16.0",

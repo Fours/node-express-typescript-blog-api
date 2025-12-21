@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express"
+import cors from "cors"
 import { articlesRouter } from "./routes/articles"
 import { tagsRouter } from "./routes/tags"
 import { authorsRouter } from "./routes/authors"
@@ -7,6 +8,8 @@ import type { Message } from "./types/types"
 
 const PORT = 8000
 const app: Express = express()
+
+app.use(cors())
 
 app.use('/api/articles', articlesRouter)
 
